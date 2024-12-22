@@ -10,7 +10,6 @@ https://discord.gg/ZV5mHBQy
 
 
 ![plot](./images/icon.png)
-![plot](./images/img1.png)
 
 # Prerequisite
 
