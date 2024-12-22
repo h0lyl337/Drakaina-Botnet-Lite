@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iMakeYouWear</title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.10.7/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.10.7/brython_stdlib.js">
+    </script>
+
+<style>
+  body{
+    background-color: black;
+  }
+  table, th, td {
+    border:1px solid red;
+  }
+  </style>
+
+</head>
+<body onload="brython()">
+  
+<center>
+  <header>
+    <div style="background-color: black;width:100%;height:6em;color:white;">
+      <a style="float:right">theme <button></button></a>
+      <a>version: 1.0</a><br> 
+
+      <img src="./static/images/home-icon.png" style="height:2em;">
+      <img src="./static/images/rat-icon.png" style="height:2em;">
+      <img src="./static/images/Settings-icon.png" style="height:2em;">
+      <img src="./static/images/build-icon.png" style="height:2em;">
+      <button>Attacks</button>
+
+  
+    </div>
+  </header>
+  <div style="border:1px solid white;float:right;color:white;">
+    <h3 style="color:white;">Unkown Visitors:</h3>
+    <center>
+      <table>
+        <tr>
+          <th>
+            ip
+          </th><br>
+        </tr>
+        <td>192.168.1.1</td>
+      </table>
+    </center>
+  </div>
+
+  <div style="border:1px solid white;float:left;color:white;">
+    <h3 style="color:white;">Unkown Visitors:</h3>
+    <center>
+      <table>
+        <tr>
+          <th>
+            ip
+          </th><br>
+        </tr>
+        <td>192.168.1.1</td>
+      </table>
+    </center>
+  </div>
+</center>
+<br>
+<center>
+  <div style="background-color: black;color:white;">
+    <center>
+      <table>
+        <tr>
+          <th >IP</th>
+          <th>Country</th>
+          <th>OS</th>
+          <td>USER</td>
+          <td>Last_Seen</td>
+          <td>Registered</td>
+        </tr>
+        {% set count = namespace(value=0) %}
+          {% for ip, user, os , registered, last_seen in rats %}
+          <tr class="rat-table">
+          <td>{{ip}}</td>
+          <td>{{user}}</td>
+          <td>{{os}}<br>
+            {% if os == "Windows"%}
+            <center><img src="./static/images/windows-logo.png" style="height:2em"></center>
+            {% endif %}
+            {% if os == "linux"%}
+            <center><img src="./static/images/linux-logo.png" style="height:2em"></center>
+            {% endif %}
+          </td>
+            
+          <td>{{user}}</td>
+          <td>{{last_seen}}</td>
+          <td>{{registered}}</td>
+          <td>
+            <button id="target-{{ count.value }}">target</button>
+            </td>
+          <td><button>Delete</button></td>
+          <td>
+            <div id='target-control-{{ count.value }}' style="display: none;">
+            <button>screenshot</button>
+            <button style="float:right;">mic-record</button>
+            <br>
+            <br>
+            <button style="float:left;">run script</button>
+            <button style="float:right;">reboot</button>
+            <br>
+            <br>
+            <button style="float:right;">download</button>
+            
+            <button style="float:left;">upload</button>
+            <br>
+            <br>
+            <center><button>Remoteshell</button></center>
+            <br>
+            <br>
+            <center><a>ip:</a></center>
+            <br>
+            <input>
+            <br>
+            <br>
+            <center><a>port:</a></center>
+            <br>
+            <input>
+            <br>
+            <br>
+            <button style="float:left;">Shutdown</button>
+            <button style="float:right;">Reboot</button>
+          </div>
+        </td>
+        </tr>
+        <script type="text/python">
+          from browser import document, alert
+          
+          def target_clicked(event):
+              print('asdf')
+              element = document["target-control-{{ count.value }}"]
+              style = element.style
+              if style.display == "none":
+                  style.display = "block"
+              else:
+                  style.display = "none"
+                    
+          document["target-{{ count.value }}"].bind("click", target_clicked)
+        </script>
+
+        {% set count.value = count.value + 1 %}
+        {% endfor %}
+        <a>total-clients: {{count.value}}</a>
+        
+        
+        
+      </table>
+    </center>
+  </div>
+</center>
+<br>
+
+
+
+
+
+</body>
+</html>
