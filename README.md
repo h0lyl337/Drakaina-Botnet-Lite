@@ -11,7 +11,7 @@ https://discord.gg/ZV5mHBQy
 
 ![plot](./images/icon.png)
 ![plot](./images/img1.png)
-![plot](./images/img2.png)
+
 # Prerequisite
 
 1) make sure python3 is installed
